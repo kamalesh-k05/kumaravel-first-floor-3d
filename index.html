@@ -52,7 +52,12 @@
   @media(max-width:900px){#left{display:none}}
 </style>
 <script type="importmap">
-{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script>
+window.__bootError=null;
+window.addEventListener('error',function(e){ window.__bootError=(e.message||'error')+ (e.filename?' @ '+e.filename:''); var el=document.getElementById('loadmsg'); if(el) el.innerHTML='Error: '+window.__bootError+'<br/>Check internet / WebGL and reload.'; });
+setTimeout(function(){ var l=document.getElementById('loading'); if(l&&l.style.display!=='none'){ var el=document.getElementById('loadmsg'); if(el&&(!window.__booted)) el.innerHTML='Still loading… if stuck: 1) check internet (CDN), 2) use Chrome/Edge, 3) enable hardware acceleration.<br/>'+(window.__bootError?'Error: '+window.__bootError:'Trying again…'); } },9000);
 </script>
 </head>
 <body>
@@ -107,7 +112,7 @@
     </div>
     <div id="walkHelp">Click to lock mouse • WASD to walk • Q/E up-down • ESC to exit</div>
     <div id="hint">Full home visualization: walls + doors + windows + furniture + lights</div>
-    <div id="loading"><div class="spin"></div><div>Building 3D from sketch…</div></div>
+    <div id="loading"><div class="spin"></div><div id="loadmsg">Building 3D from sketch…</div></div>
   </div>
 </div>
 <script type="module">
@@ -381,6 +386,7 @@ function animate(){ requestAnimationFrame(animate); const dt=Math.min(clock.getD
   updateLabels(); renderer.render(scene,camera);
   frames++; const now=performance.now(); if(now-last>800){ document.getElementById('fps').textContent=Math.round(frames*1000/(now-last))+' fps'; frames=0; last=now; } }
 resize(); animate();
+window.__booted=true;
 document.getElementById('loading').style.display='none';
 </script>
 </body>
