@@ -240,13 +240,12 @@ function wallRun(x1,y1,x2,y2,{h=H,t=T_OUT,mat=M.outer,gaps=[]}={}){
     // glass for windows (if gap is window type)
   }
 }
-function glassPane(x1,y1,x2,y2,y0,y1){
-  const len=Math.hypot(x2-x1,y2-y1); const cx=(x1+x2)/2, cz=(y1+y2)/2;
-  const h=y1-y0; const m=new THREE.Mesh(new THREE.BoxGeometry(len,h,0.08),M.glass);
-  m.position.set(cx,(y0+y1)/2,cz); m.rotation.y=Math.atan2(x2-x1,y2-y1)-Math.PI/2; house.add(m);
-  // frame
-  const f=new THREE.Mesh(new THREE.BoxGeometry(len+0.15,0.12,0.18),M.woodD); f.position.set(cx,y1,cz); f.rotation.y=m.rotation.y; house.add(f);
-  const f2=f.clone(); f2.position.set(cx,y0,cz); house.add(f2);
+function glassPane(x1,z1,x2,z2,by0,by1){
+  const len=Math.hypot(x2-x1,z2-z1); const cx=(x1+x2)/2, cz=(z1+z2)/2;
+  const h=by1-by0; const m=new THREE.Mesh(new THREE.BoxGeometry(len,h,0.08),M.glass);
+  m.position.set(cx,(by0+by1)/2,cz); m.rotation.y=Math.atan2(x2-x1,z2-z1)-Math.PI/2; house.add(m);
+  const f=new THREE.Mesh(new THREE.BoxGeometry(len+0.15,0.12,0.18),M.woodD); f.position.set(cx,by1,cz); f.rotation.y=m.rotation.y; house.add(f);
+  const f2=f.clone(); f2.position.set(cx,by0,cz); house.add(f2);
 }
 
 // OUTER WALLS
